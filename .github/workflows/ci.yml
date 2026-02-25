@@ -1,0 +1,38 @@
+name: OWASPGuard CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Optional: enables higher Hugging Face download limits.
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+
+      # Optional: if you ever integrate paid APIs, keep keys in GitHub Secrets.
+      STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+      HIGHNOTE_LIVE_KEY: ${{ secrets.HIGHNOTE_LIVE_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r OWASPGuard/requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest -q
+

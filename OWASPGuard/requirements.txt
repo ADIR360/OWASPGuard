@@ -1,0 +1,23 @@
+# Core dependencies
+beautifulsoup4>=4.12.2
+lxml>=5.0.0
+pyyaml>=6.0
+reportlab>=4.0.7
+jinja2>=3.1.2
+requests
+lightgbm
+scikit-learn
+transformers>=4.46.0
+torch>=2.3.0
+psutil>=2.31.0
+numpy>=1.24.0
+
+# GUI (PySide6 for professional look)
+PySide6>=6.5.0
+
+# Optional: For advanced AST analysis
+ast-comments>=1.1.1
+
+# Development
+pytest>=7.0.0
+
