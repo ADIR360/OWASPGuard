@@ -25,20 +25,38 @@ except ImportError:
 
 
 def _normalize_github_url(url: str) -> str:
-    """Convert various GitHub URL formats to clone URL."""
+    """Convert various GitHub URL formats (and deep links) to a clone URL."""
     url = url.strip()
-    # https://github.com/owner/repo or https://github.com/owner/repo/
+
+    # Normalize https://github.com/owner/repo[/...]
     if url.startswith("https://github.com/"):
-        return url.rstrip("/") if not url.endswith(".git") else url
-    # github.com/owner/repo
+        path = url[len("https://github.com/") :].strip("/")
+        parts = path.split("/")
+        if len(parts) >= 2:
+            owner, repo = parts[0], parts[1]
+            # Drop .git if present in repo name
+            repo = repo[:-4] if repo.endswith(".git") else repo
+            return f"https://github.com/{owner}/{repo}.git"
+        return url
+
+    # github.com/owner/repo[/...]
     if url.startswith("github.com/"):
+        path = url[len("github.com/") :].strip("/")
+        parts = path.split("/")
+        if len(parts) >= 2:
+            owner, repo = parts[0], parts[1]
+            repo = repo[:-4] if repo.endswith(".git") else repo
+            return f"https://github.com/{owner}/{repo}.git"
         return f"https://{url.rstrip('/')}"
-    # git@github.com:owner/repo.git
+
+    # git@github.com:owner/repo[.git]
     if url.startswith("git@github.com:"):
-        user_repo = url.replace("git@github.com:", "").rstrip("/")
-        if not user_repo.endswith(".git"):
-            user_repo += ".git"
-        return f"https://github.com/{user_repo[:-4]}"
+        user_repo = url.replace("git@github.com:", "").strip("/")
+        if user_repo.endswith(".git"):
+            user_repo = user_repo[:-4]
+        owner, repo = user_repo.split("/", 1)
+        return f"https://github.com/{owner}/{repo}.git"
+
     return url
 
 
