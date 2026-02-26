@@ -11,12 +11,17 @@ transformers>=4.46.0
 torch>=2.3.0
 psutil>=2.31.0
 numpy>=1.24.0
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
 
 # GUI (PySide6 for professional look)
 PySide6>=6.5.0
 
 # Optional: For advanced AST analysis
 ast-comments>=1.1.1
+
+# GitHub repo cloning
+GitPython>=3.1.0
 
 # Development
 pytest>=7.0.0

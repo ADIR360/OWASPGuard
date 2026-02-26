@@ -1,0 +1,44 @@
+:root {
+  /* Cycode-inspired dark theme */
+  --bg-primary: #0f1419;
+  --bg-secondary: #151b23;
+  --bg-tertiary: #1a222d;
+  --bg-elevated: #1e2732;
+  --border: #2d3748;
+  --border-light: #374151;
+  --text-primary: #f7fafc;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+  --accent: #3182ce;
+  --accent-hover: #2c5282;
+  --severity-critical: #e53e3e;
+  --severity-high: #dd6b20;
+  --severity-medium: #d69e2e;
+  --severity-low: #38a169;
+  --severity-info: #718096;
+  --success: #48bb78;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}

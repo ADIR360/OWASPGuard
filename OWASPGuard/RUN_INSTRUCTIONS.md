@@ -26,6 +26,42 @@ cd OWASPGuard
 python3 -m OWASPGuard scan /path/to/project
 ```
 
+### Option 4: Web UI (Cycode-style React Dashboard)
+```bash
+# One command – builds frontend, frees port, starts API (from project root):
+source .venv/bin/activate
+python run_project.py
+
+# Optional: OWASPGUARD_PORT=8001 OWASPGUARD_RELOAD=0 python run_project.py
+
+# Or use the shell script:
+cd OWASPGuard
+uvicorn OWASPGuard.api.server:app --port 8000 --reload --host 0.0.0.0  # run from Major 2
+# OR
+cd OWASPGuard && uvicorn api.server:app --port 8000 --reload --host 0.0.0.0
+```
+Then open **http://localhost:8000** (or your port) in your browser.
+
+- **GitHub scanning**: Enter a repo URL (e.g. `https://github.com/owner/repo`) and click Run Scan
+- **Local path**: Switch to "Local Path" and enter a filesystem path
+- View violations in a Cycode-style table with severity badges, OWASP categories, and expandable details
+
+**Development mode** (hot reload for React):
+```bash
+# Terminal 1: API (from project root Major 2)
+source .venv/bin/activate
+./OWASPGuard/start_server.sh 8000
+
+# Terminal 2: React dev server (proxies /api to backend)
+cd OWASPGuard/frontend && npm run dev
+```
+Open **http://localhost:5173** for the React UI. If the API runs on a different port (e.g. 8001), set `VITE_API_TARGET=http://localhost:8001` before `npm run dev`.
+
+**Troubleshooting – "Nothing happens" on Run Scan:**
+- Ensure the API backend is running (./OWASPGuard/start_server.sh)
+- Use the same origin: open the UI from the same host/port as the API (e.g. http://localhost:8000)
+- If using Vite dev (port 5173), the proxy must point to your API port (default 8000)
+
 ---
 
 ## 📋 What's New

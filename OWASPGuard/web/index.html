@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OWASPGuard Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <header class="sidebar-header">
+          <div class="logo">🛡️ OWASPGuard</div>
+          <div class="subtitle">Security Analysis Dashboard</div>
+        </header>
+
+        <section class="panel">
+          <h2>Scan Configuration</h2>
+          <form id="scan-form">
+            <label class="field">
+              <span>Project path</span>
+              <input
+                type="text"
+                id="project-path"
+                placeholder="/absolute/path/to/project"
+                required
+              />
+            </label>
+
+            <div class="field">
+              <span>Languages</span>
+              <label class="checkbox">
+                <input type="checkbox" id="lang-python" checked />
+                <span>Python</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="lang-js" checked />
+                <span>JavaScript / TypeScript</span>
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Max workers</span>
+              <input type="number" id="max-workers" min="1" max="32" value="4" />
+            </label>
+
+            <label class="checkbox inline">
+              <input type="checkbox" id="online-cve" checked />
+              <span>Use online CVE sources</span>
+            </label>
+
+            <button type="submit" id="scan-button">Run Scan</button>
+          </form>
+          <div id="scan-status" class="scan-status">Idle</div>
+        </section>
+
+        <section class="panel small">
+          <h2>Filters</h2>
+          <label class="field">
+            <span>Severity</span>
+            <select id="filter-severity">
+              <option value="ALL">All</option>
+              <option value="CRITICAL">Critical</option>
+              <option value="HIGH">High</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="LOW">Low</option>
+              <option value="INFO">Info</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>OWASP</span>
+            <select id="filter-owasp">
+              <option value="ALL">All</option>
+              <option value="A01">A01</option>
+              <option value="A02">A02</option>
+              <option value="A03">A03</option>
+              <option value="A04">A04</option>
+              <option value="A05">A05</option>
+              <option value="A06">A06</option>
+              <option value="A07">A07</option>
+              <option value="A08">A08</option>
+              <option value="A09">A09</option>
+              <option value="A10">A10</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Search</span>
+            <input
+              type="text"
+              id="search-text"
+              placeholder="File name or description..."
+            />
+          </label>
+        </section>
+      </aside>
+
+      <main class="main">
+        <section class="summary-cards">
+          <div class="card">
+            <div class="card-label">Total Findings</div>
+            <div class="card-number" id="summary-total">0</div>
+          </div>
+          <div class="card critical">
+            <div class="card-label">Critical</div>
+            <div class="card-number" id="summary-critical">0</div>
+          </div>
+          <div class="card high">
+            <div class="card-label">High</div>
+            <div class="card-number" id="summary-high">0</div>
+          </div>
+          <div class="card medium">
+            <div class="card-label">Medium</div>
+            <div class="card-number" id="summary-medium">0</div>
+          </div>
+          <div class="card low">
+            <div class="card-label">Low</div>
+            <div class="card-number" id="summary-low">0</div>
+          </div>
+        </section>
+
+        <section class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-label">Files scanned</span>
+            <span class="stat-value" id="stat-files">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Scan duration (s)</span>
+            <span class="stat-value" id="stat-duration">0.0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Project</span>
+            <span class="stat-value" id="stat-project">–</span>
+          </div>
+        </section>
+
+        <section class="table-panel">
+          <header class="table-header">
+            <h2>Findings</h2>
+            <div class="table-caption" id="table-caption">
+              No data loaded. Run a scan to see results.
+            </div>
+          </header>
+          <div class="table-wrapper">
+            <table id="findings-table">
+              <thead>
+                <tr>
+                  <th>Severity</th>
+                  <th>OWASP</th>
+                  <th>File</th>
+                  <th>Line</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="details-panel">
+          <header>
+            <h2>Finding Details</h2>
+          </header>
+          <pre id="details" class="details-content">
+Select a finding to see details here.</pre
+          >
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
+
