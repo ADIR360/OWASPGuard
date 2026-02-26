@@ -1,0 +1,1 @@
+{"cves": [{"cve_id": "CVE-2020-25032", "severity": "HIGH", "description": "An issue was discovered in Flask-CORS (aka CORS Middleware for Flask) before 3.0.9. It allows ../ directory traversal to access private resources because resource matching does not ensure that pathnam", "package": "flask-cors", "version": "4.0.0"}]}

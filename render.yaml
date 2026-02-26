@@ -1,0 +1,7 @@
+# Render.com blueprint - OWASPGuard
+# Uses Dockerfile (has both Node + Python) so frontend builds correctly
+services:
+  - type: web
+    name: owaspguard
+    region: oregon
+    dockerfilePath: ./Dockerfile

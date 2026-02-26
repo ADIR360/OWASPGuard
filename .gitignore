@@ -23,7 +23,11 @@ wheels/
 *.egg
 reports/
 *.pdf
-*.json
+# Ignore scan/report JSON, not package.json or package-lock.json
+reports/*.json
+scan_results.json
+**/scan_results*.json
+**/*report*.json
 .DS_Store
 .vscode/
 .idea/

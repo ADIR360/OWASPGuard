@@ -57,6 +57,16 @@ cd OWASPGuard/frontend && npm run dev
 ```
 Open **http://localhost:5173** for the React UI. If the API runs on a different port (e.g. 8001), set `VITE_API_TARGET=http://localhost:8001` before `npm run dev`.
 
+### Deploy to Render (free)
+1. Push your repo to GitHub.
+2. In [Render Dashboard](https://dashboard.render.com) → New → Web Service → connect repo.
+3. Render will detect `render.yaml` and use the Dockerfile (builds frontend + runs API).
+4. Deploy; get a URL like `https://owaspguard.onrender.com`.
+
+**If package.json was previously gitignored:** Run  
+`git add -f OWASPGuard/frontend/package.json OWASPGuard/frontend/package-lock.json`  
+then commit and push.
+
 **Troubleshooting – "Nothing happens" on Run Scan:**
 - Ensure the API backend is running (./OWASPGuard/start_server.sh)
 - Use the same origin: open the UI from the same host/port as the API (e.g. http://localhost:8000)
