@@ -1,0 +1,5 @@
+# Render.com - use when repo root is OWASPGuard (e.g. github.com/ADIR360/OWASPGuard)
+services:
+  - type: web
+    name: owaspguard
+    dockerfilePath: ./Dockerfile
