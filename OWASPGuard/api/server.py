@@ -1,12 +1,13 @@
 import shutil
 import tempfile
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 import sys
-from fastapi import FastAPI, HTTPException
+from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 # Ensure project root (OWASPGuard) is importable - resolve to absolute path
@@ -16,6 +17,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from core.scan_service import run_scan as run_scan_service  # noqa: E402
+from reporting.pdf_report import PDFReportGenerator  # noqa: E402
 
 try:
     import git
@@ -98,6 +100,15 @@ class ScanGitHubRequest(BaseModel):
     use_online_cve: bool = Field(default=True)
 
 
+class PdfReportRequest(BaseModel):
+    """Request body for generating a PDF report from existing scan results."""
+
+    results: Dict[str, Any] = Field(
+        ...,
+        description="Full scan results object as returned by /api/scan or /api/scan/github.",
+    )
+
+
 app = FastAPI(
     title="OWASPGuard API",
     description="FastAPI backend for OWASPGuard SAST/SCA/Config scanning.",
@@ -127,7 +138,7 @@ async def info() -> dict:
         "status": "ok",
         "version": "1.0.0",
         "github_scan": GIT_AVAILABLE,
-        "endpoints": ["/api/scan", "/api/scan/github"],
+        "endpoints": ["/api/scan", "/api/scan/github", "/api/report/pdf"],
     }
 
 
@@ -202,6 +213,34 @@ async def scan_github(request: ScanGitHubRequest) -> dict:
             shutil.rmtree(temp_dir, ignore_errors=True)
         except Exception:
             pass
+
+
+@app.post("/api/report/pdf")
+async def generate_pdf_report(
+    request: PdfReportRequest,
+    background_tasks: BackgroundTasks,
+) -> FileResponse:
+    """
+    Generate a PDF report from scan results and return it as a downloadable file.
+
+    The frontend typically sends the findings, stats, and categorized data
+    it already has in memory from a previous /api/scan or /api/scan/github call.
+    """
+    try:
+        tmp_dir = tempfile.mkdtemp(prefix="owaspguard_pdf_")
+        generator = PDFReportGenerator()
+        pdf_path = generator.generate(request.results, output_dir=tmp_dir)
+
+        # Clean up the temporary directory after the response is sent
+        background_tasks.add_task(shutil.rmtree, tmp_dir, ignore_errors=True)
+
+        return FileResponse(
+            path=pdf_path,
+            media_type="application/pdf",
+            filename=Path(pdf_path).name,
+        )
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Failed to generate PDF report: {exc}")
 
 
 # Serve frontend: prefer React build, fallback to static web
