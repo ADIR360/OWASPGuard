@@ -4,7 +4,8 @@ import { Sidebar } from './components/Sidebar'
 import { ViolationsPanel } from './components/ViolationsPanel'
 import { DetailPanel } from './components/DetailPanel'
 import { SummaryCards } from './components/SummaryCards'
-import { runScan } from './api'
+import { AnalyticsPanel } from './components/AnalyticsPanel'
+import { runScan, downloadPdfReport } from './api'
 
 function App() {
   const [findings, setFindings] = useState([])
@@ -14,6 +15,8 @@ function App() {
   const [selectedFinding, setSelectedFinding] = useState(null)
   const [filters, setFilters] = useState({ severity: 'ALL', owasp: 'ALL', search: '' })
   const [apiConnected, setApiConnected] = useState(null)
+  const [categorized, setCategorized] = useState({})
+  const [exporting, setExporting] = useState(false)
 
   useEffect(() => {
     fetch(`${window.location.origin}/api/health`)
@@ -26,17 +29,35 @@ function App() {
     setError(null)
     setFindings([])
     setStats(null)
+    setCategorized({})
     setSelectedFinding(null)
     try {
       const result = await runScan(undefined, options)
       setFindings(result.findings || [])
       setStats(result.stats || {})
+      setCategorized(result.categorized || {})
     } catch (err) {
       setError(err.message || 'Scan failed')
     } finally {
       setLoading(false)
     }
   }, [])
+
+  const handleExportPdf = useCallback(async () => {
+    if (!findings.length) return
+    setExporting(true)
+    try {
+      await downloadPdfReport({
+        findings,
+        stats: stats || {},
+        categorized: categorized || {},
+      })
+    } catch (err) {
+      setError(err.message || 'Failed to export PDF report')
+    } finally {
+      setExporting(false)
+    }
+  }, [findings, stats, categorized])
 
   const filteredFindings = findings.filter((f) => {
     const sev = (f.severity || '').toUpperCase()
@@ -81,11 +102,27 @@ function App() {
           <SummaryCards findings={findings} />
           {stats && (
             <div className="stats-bar">
-              <span className="stat">Files scanned: <strong>{stats.files_scanned ?? 0}</strong></span>
-              <span className="stat">Duration: <strong>{stats.scan_duration?.toFixed(1) ?? 0}s</strong></span>
-              <span className="stat">Source: <strong>{stats.source === 'github' ? 'GitHub' : stats.repo_url || 'Local'}</strong></span>
+              <span className="stat">
+                Files scanned: <strong>{stats.files_scanned ?? 0}</strong>
+              </span>
+              <span className="stat">
+                Duration: <strong>{stats.scan_duration?.toFixed(1) ?? 0}s</strong>
+              </span>
+              <span className="stat">
+                Source:{' '}
+                <strong>{stats.source === 'github' ? 'GitHub' : stats.repo_url || 'Local'}</strong>
+              </span>
+              <button
+                type="button"
+                className="export-button"
+                onClick={handleExportPdf}
+                disabled={!findings.length || exporting}
+              >
+                {exporting ? 'Exporting…' : 'Export as PDF'}
+              </button>
             </div>
           )}
+          <AnalyticsPanel findings={findings} />
           <ViolationsPanel
             findings={filteredFindings}
             selected={selectedFinding}

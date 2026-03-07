@@ -44,4 +44,44 @@ const runScan = async (apiBase, options) => {
   return data
 }
 
-export { runScan, getApiBase }
+const downloadPdfReport = async ({ findings, stats, categorized }) => {
+  const base = getApiBase()
+
+  if (!Array.isArray(findings) || findings.length === 0) {
+    throw new Error('No findings available to export')
+  }
+
+  const payload = {
+    results: {
+      findings,
+      stats: stats || {},
+      categorized: categorized || {},
+    },
+  }
+
+  const res = await fetch(`${base}/report/pdf`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+
+  if (!res.ok) {
+    throw new Error(`Failed to generate PDF report (${res.status})`)
+  }
+
+  const blob = await res.blob()
+  const url = window.URL.createObjectURL(blob)
+
+  try {
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'owaspguard_report.pdf'
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+  } finally {
+    window.URL.revokeObjectURL(url)
+  }
+}
+
+export { runScan, getApiBase, downloadPdfReport }
