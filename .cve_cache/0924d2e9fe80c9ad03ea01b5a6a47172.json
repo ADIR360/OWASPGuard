@@ -1,1 +1,0 @@
-{"cves": [{"cve_id": "CVE-2023-49297", "severity": "LOW", "description": "PyDrive2 is a wrapper library of google-api-python-client that simplifies many common Google Drive API V2 tasks. Unsafe YAML deserilization will result in arbitrary code execution. A maliciously craft", "package": "google-api-python-client", "version": "latest"}]}

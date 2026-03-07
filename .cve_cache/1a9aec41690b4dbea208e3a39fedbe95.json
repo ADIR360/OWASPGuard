@@ -1,1 +1,0 @@
-{"cves": [{"cve_id": "CVE-2007-0842", "severity": "MEDIUM", "description": "The 64-bit versions of Microsoft Visual C++ 8.0 standard library (MSVCR80.DLL) time functions, including (1) localtime, (2) localtime_s, (3) gmtime, (4) gmtime_s, (5) ctime, (6) ctime_s, (7) wctime, (", "package": "gmtime", "version": "latest"}]}

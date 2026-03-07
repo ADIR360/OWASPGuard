@@ -1,1 +1,0 @@
-{"cves": [{"cve_id": "CVE-2025-71176", "severity": "MEDIUM", "description": "pytest through 9.0.2 on UNIX relies on directories with the /tmp/pytest-of-{user} name pattern, which allows local users to cause a denial of service or possibly gain privileges.", "package": "pytest", "version": "latest"}]}

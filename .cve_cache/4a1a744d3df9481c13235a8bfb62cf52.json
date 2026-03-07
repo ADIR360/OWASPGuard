@@ -1,1 +1,0 @@
-{"cves": [{"cve_id": "CVE-2012-5825", "severity": "MEDIUM", "description": "Tweepy does not verify that the server hostname matches a domain name in the subject's Common Name (CN) or subjectAltName field of the X.509 certificate, which allows man-in-the-middle attackers to sp", "package": "tweepy", "version": "latest"}]}

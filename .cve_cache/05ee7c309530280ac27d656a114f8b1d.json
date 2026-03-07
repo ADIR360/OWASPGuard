@@ -1,1 +1,0 @@
-{"cves": [{"cve_id": "CVE-2024-39903", "severity": "HIGH", "description": "Solara is a pure Python, React-style framework for scaling Jupyter and web apps. A Local File Inclusion (LFI) vulnerability was identified in widgetti/solara, in version <1.35.1, which was fixed in ve", "package": "solara", "version": "latest"}]}

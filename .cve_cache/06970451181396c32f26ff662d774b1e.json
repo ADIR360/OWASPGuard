@@ -1,1 +1,0 @@
-{"cves": [{"cve_id": "CVE-2024-36039", "severity": "MEDIUM", "description": "PyMySQL through 1.1.0 allows SQL injection if used with untrusted JSON input because keys are not escaped by escape_dict.", "package": "pymysql", "version": "1.0.2"}]}
