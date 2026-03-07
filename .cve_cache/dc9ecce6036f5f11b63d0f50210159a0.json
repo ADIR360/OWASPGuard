@@ -1,0 +1,1 @@
+{"cves": [{"cve_id": "CVE-2022-2233", "severity": "HIGH", "description": "The Banner Cycler plugin for WordPress is vulnerable to Cross-Site Request Forgery in versions up to, and including 1.4. This is due to missing nonce protection on the pabc_admin_slides_postback() fun", "package": "cycler", "version": "0.10.0"}]}

@@ -1,0 +1,1 @@
+{"cves": [{"cve_id": "CVE-2015-1251", "severity": "MEDIUM", "description": "Use-after-free vulnerability in the SpeechRecognitionClient implementation in the Speech subsystem in Google Chrome before 43.0.2357.65 allows remote attackers to execute arbitrary code via a crafted ", "package": "speechrecognition", "version": "latest"}]}

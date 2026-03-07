@@ -22,26 +22,35 @@ pip install -r requirements.txt
 
 ## Usage
 
-### CLI
+### CLI (planned)
 
-```bash
-# Scan a project
-python -m cli.main scan ./project
-
-# Scan with specific language
-python -m cli.main scan --lang python ./repo
-
-# Generate PDF report
-python -m cli.main report --pdf
-
-# Generate JSON report
-python -m cli.main report --json
-```
+The `OWASPGuard/cli` package contains `ScanCommand` and `ReportCommand` building blocks for a future CLI, but the final entrypoint is not wired yet.  
+For now, prefer the **GUI** or **programmatic usage**.
 
 ### GUI
 
+To launch the modern GUI from the project root:
+
 ```bash
-python -m gui.app
+python -m OWASPGuard.gui.modern_app
+```
+
+### Programmatic (Python)
+
+You can run a scan directly from Python:
+
+```python
+from OWASPGuard.core.orchestrator import ScanOrchestrator
+
+orchestrator = ScanOrchestrator(
+    project_path=".",
+    languages=["python", "javascript"],
+    max_workers=4,
+)
+
+results = orchestrator.scan()
+print("Files scanned:", results["stats"]["files_scanned"])
+print("Total findings:", len(results["findings"]))
 ```
 
 ## Architecture

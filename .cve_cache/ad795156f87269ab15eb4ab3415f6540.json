@@ -1,0 +1,1 @@
+{"cves": [{"cve_id": "CVE-2021-39174", "severity": "HIGH", "description": "Cachet is an open source status page system. Prior to version 2.5.1, authenticated users, regardless of their privileges (User or Admin), can leak the value of any configuration entry of the dotenv fi", "package": "dotenv", "version": "16.4.5"}]}

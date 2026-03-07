@@ -1,0 +1,1 @@
+{"cves": [{"cve_id": "CVE-2022-24859", "severity": "MEDIUM", "description": "PyPDF2 is an open source python PDF library capable of splitting, merging, cropping, and transforming the pages of PDF files. In versions prior to 1.27.5 an attacker who uses this vulnerability can cr", "package": "pypdf2", "version": "latest"}]}
