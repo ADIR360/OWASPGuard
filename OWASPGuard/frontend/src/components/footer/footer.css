@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+main {
+  width: 100%;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 16px 70px -8px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s linear;
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+footer .containerx {
+  width: 100%;
+  padding: 30px 10vh;
+  flex-direction: column;
+}
+
+.content_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.profil .logo_area {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.profil .logo_area img {
+  background-color: rgb(0, 0, 0);
+  filter: invert(1);
+  width: 2vw;
+}
+
+.logo_area .logo_name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0 1rem;
+}
+.profil {
+  width: 50vh;
+}
+.desc_area {
+  width: 70vh;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.desc_area p {
+  color: #828282;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: "Rubik", sans-serif;
+}
+
+.social_media box-icon {
+  fill: #313131;
+  margin-right: 18px;
+  font-size: 24px;
+}
+
+.social_media box-icon:hover {
+  fill: #313131;
+}
+
+.service_area {
+  display: flex;
+}
+
+.service_header {
+  margin-right: 40px;
+}
+
+li.service_name {
+  font-family: "Rubik", sans-serif;
+  color: #000;
+  font-weight: 600;
+}
+
+.service_header li a {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1px;
+  color: inherit;
+  font-family: "Rubik", sans-serif;
+  color: #a9a9a9;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.5s ease-in-out;
+}
+
+.service_header li a:hover {
+  color: #000;
+}
+
+.service_header li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #000000;
+  transition: width 0.3s ease-in-out;
+}
+
+.service_header li a:hover::after {
+  width: 100%;
+}
+
+.service_header li {
+  margin-bottom: 10px;
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: #828282;
+  margin-bottom: 1rem;
+}
+
+.footer_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy_right {
+  color: #828282;
+  display: flex;
+  align-items: center;
+}
+
+.copy_right span {
+  margin-left: 8px;
+  font-weight: 400;
+  letter-spacing: 0.135rem;
+  color: #828282;
+  font-family: "Rubik", sans-serif;
+}
+
+.tou a {
+  color: #828282;
+  margin-left: 1.5rem;
+  font-family: "Rubik", sans-serif;
+}
+
+.tou a:hover {
+  color: #313131;
+}
+
+@media only screen and (max-width: 880px) {
+  footer {
+    width: 180vw;
+  }
+  .containerx {
+    padding: 5vh 5vh 2vh 5vh;
+  }
+  .content_footer {
+    flex-direction: column;
+    margin-bottom: 0;
+    align-items: flex-start;
+  }
+
+  .social_media {
+    display: flex;
+    width: 38vh;
+    padding-bottom: 2vh;
+    border-bottom: 1px solid black;
+  }
+
+  .profil .logo_area {
+    margin-bottom: 1.2vh;
+    img {
+      width: 6vh;
+    }
+  }
+
+  .profil {
+    width: 65vh;
+    margin-bottom: 2vh;
+    margin-right: 2vh;
+  }
+
+  .desc_area {
+    width: 65vh;
+    padding-bottom: 2vh;
+    margin-bottom: 2vh;
+    border-bottom: 1px solid black;
+  }
+
+  .service_area {
+    flex-direction: row;
+    max-width: 220vw;
+    gap: 4vw;
+    padding-bottom: 1vh;
+  }
+
+  .service_header {
+    margin-right: 2vh;
+  }
+
+  .service_header li {
+    margin-bottom: 15px;
+  }
+
+  .footer_bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tou {
+    margin-top: 1.5vh;
+  }
+}

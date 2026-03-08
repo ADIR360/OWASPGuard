@@ -1,0 +1,80 @@
+.legal-container {
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 28px;
+  margin: 0 20vw;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  /* background-color: #b3b3b3; */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  h1 {
+    font-size: 40px;
+    line-height: 60px;
+    padding: 15px 0;
+    width: 80%;
+    border-bottom: #ffffff80 1px solid;
+  }
+  h1,
+  h2 {
+    font-weight: 800;
+  }
+  h2 {
+    font-size: 32px;
+    border-bottom: #ffffff80 1px solid;
+    padding: 24px 0;
+    /* background-color: red; */
+    line-height: 48px;
+  }
+  h3 {
+    font-size: 24px;
+    padding: 16px 0;
+    /* background-color: rgb(0, 183, 18); */
+    line-height: 36px;
+  }
+  h3,
+  h4 {
+    font-weight: 700;
+  }
+  h4 {
+    padding: 14px 0;
+    font-size: 20px;
+    line-height: 30px;
+  }
+  h5 {
+    font-size: 16px;
+  }
+  h5,
+  h6 {
+    line-height: 24px;
+    font-weight: 700;
+  }
+  h6 {
+    font-size: cacl(16px); /* Note: Typo here (cacl should be calc) */
+  }
+  p {
+    margin: 10px 0px;
+  }
+  a {
+    text-decoration: none;
+    color: #ffffff80;
+  }
+  a:hover,
+  a[rel~="nofollow"] {
+    text-decoration: line-through;
+    color: #ff0000;
+  }
+  a[rel~="nofollow"] {
+    color: #ffffff80;
+    text-decoration: none;
+  }
+  a[rel~="nofollow"]:hover {
+    text-decoration: line-through;
+    color: #ff0000;
+  }
+  ul {
+    padding-left: 40px;
+  }
+  #link_Styles1 {
+  }
+}

@@ -4,34 +4,8 @@
   flex-direction: column;
 }
 
-.app-header {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-}
-
-.header-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo-icon {
-  font-size: 1.5rem;
-}
-
-.logo-text {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--text-primary);
-}
-
-.logo-sub {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-left: 4px;
+.router-main {
+  flex: 1;
 }
 
 .app-body {
